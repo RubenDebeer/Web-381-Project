@@ -1,0 +1,17 @@
+{
+  "name": "unzipper",
+  "version": "1.0.0",
+  "description": "Unzips files recursively",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "unzip"
+  ],
+  "author": "Johannes de Wet",
+  "license": "MIT",
+  "dependencies": {
+    "extract-zip": "^2.0.1"
+  }
+}
