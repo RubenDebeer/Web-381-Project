@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/RubenDebeer/Web-381-Project/issues"
   },
-  "homepage": "https://github.com/RubenDebeer/Web-381-Project#readme"
+  "homepage": "https://github.com/RubenDebeer/Web-381-Project#readme",
+  "dependencies": {
+    "console-menu": "^0.1.0"
+  }
 }
