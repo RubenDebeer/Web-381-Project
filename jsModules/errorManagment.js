@@ -39,7 +39,7 @@ module.exports = (fdir) => {
     fs.appendFile(fdir + '/test.txt', 'text for testing writing ability.', function(err) {
         if (err) {
             obj.passed = false;
-            obj.description = "Directory does not have append permisstions";
+            obj.description = "The Directory does not have append permisstions";
             obj.suggestion = "change security permissions to allow any users to append files and folders"
             obj.catchPhraseToUse = "Witchcraft!!";
             return obj;
@@ -50,8 +50,8 @@ module.exports = (fdir) => {
     fs.unlink(fdir + '/test.txt', function(err) {
         if (err) {
             obj.passed = false;
-            obj.description = "Directory does not have delete permisstions";
-            obj.suggestion = "change security permissions to allow any users to delete files and folders"
+            obj.description = "The Directory does not have delete permisstions";
+            obj.suggestion = "change security permissions to allow any users to delete files and folders (Go to Dir to Delete test.txt)"
             obj.catchPhraseToUse = "Oh... poo";
             return obj;
         }
