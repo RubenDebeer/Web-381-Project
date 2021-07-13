@@ -1,4 +1,6 @@
-console.log('\x1b[31m%s\x1b[0m',
+console.clear();
+
+console.log("\x1b[31m%s\x1b[0m",
     "░█──░█ █▀▀ █── █▀▀ █▀▀█ █▀▄▀█ █▀▀ 　 ▀▀█▀▀ █▀▀█ \n" +
     "░█░█░█ █▀▀ █── █── █──█ █─▀─█ █▀▀ 　 ──█── █──█ \n" +
     "░█▄▀▄█ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀▀ ▀───▀ ▀▀▀ 　 ──▀── ▀▀▀▀ \n\n");
@@ -59,10 +61,12 @@ menu([
 
 const compressFiles = () => {
     console.log('\x1b[36m%s\x1b[0m','You chose to compress files.');
+    //ask directory; var and return
 }
 
 const unzipFiles = () => {
     console.log('\x1b[36m%s\x1b[0m','You chose to zip files.');
+    //ask directory
 }
 
 const helpMenu = () => {
