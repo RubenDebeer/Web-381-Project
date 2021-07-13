@@ -1,0 +1,24 @@
+{
+    "name": "extracti-nator",
+    "version": "1.0.0",
+    "description": "Application that is able to compress and un-compress files and folders",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/RubenDebeer/Web-381-Project.git"
+    },
+    "keywords": [
+        "compress",
+        "un-compress",
+        "manager"
+    ],
+    "author": "Johannes de Wet, Lijani van wyk de Fries, Ruben de Beer, Dylan Zeus, Jayden Hardman",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/RubenDebeer/Web-381-Project/issues"
+    },
+    "homepage": "https://github.com/RubenDebeer/Web-381-Project#readme"
+}
