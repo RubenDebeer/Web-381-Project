@@ -16,3 +16,4 @@ Promise.all(directoryFiles.map(filename => {
   })
 }))
   .then(console.log('done'));
+  
