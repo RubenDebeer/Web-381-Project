@@ -4,7 +4,9 @@ const zlib = require('zlib');
 module.exports = {
     compress: function(dir) {
         var message;
-        Promise.all(dir.map(filename => {
+        const directoryFiles = fs.readdirSync(dir);
+
+        Promise.all(directoryFiles.map(filename => {
                 return new Promise((resolve, reject) => {
                     const fileContents = fs.createReadStream(`${dir}/${filename}`);
                     const writeStream = fs.createWriteStream(`${dir}/${filename}.gz`);
