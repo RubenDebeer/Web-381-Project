@@ -3,7 +3,6 @@ const zlib = require('zlib');
 
 //We need to get the suer input and change the readdirSync paramaters
 const directoryFiles = fs.readdirSync('c:/Users/boeps/Desktop/zipping/data3');
-
 Promise.all(directoryFiles.map(filename => {
   return new Promise((resolve, reject) => {
     const fileContents = fs.createReadStream(`c:/Users/boeps/Desktop/zipping/data3/${filename}`);
@@ -16,4 +15,3 @@ Promise.all(directoryFiles.map(filename => {
   })
 }))
   .then(console.log('done'));
-  
