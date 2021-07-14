@@ -1,4 +1,6 @@
 
+var directory = "";
+
 const mainMenu = () => {
     const menu = require('console-menu');
 
@@ -63,15 +65,33 @@ const mainMenu = () => {
 
 mainMenu();
 
+////////////////////////// METHODS /////////////////////////////////////////
+
+const prompt = require('prompt-sync')();
+
 const compressFiles = () => {
-    console.log('\x1b[36m%s\x1b[0m','You chose to compress files, so let us compress this baby up.');
-    //ask directory; var and return
+    console.log('\x1b[36m%s\x1b[0m','You chose to compress files, so let us compress this baby up.\n');
+
+    //check if directory is valid
+    
+    directory = getDirectory();
+    return directory;
 }
 
 const unzipFiles = () => {
-    console.log('\x1b[36m%s\x1b[0m','You chose to zip files, so let us zip this baby up.');
-    //ask directory
+    console.log('\x1b[36m%s\x1b[0m','You chose to zip files, so let us zip this baby up.\n');
+    
+    //check if directory is valid
+
+    directory = getDirectory();
+    return directory;
 }
+
+const getDirectory = () => {
+    return prompt('Please enter the file directory.');
+}
+
+////////////////////// HELP MENU ///////////////////////////////////
 
 const showHelpMenu = () => {
     console.clear();
@@ -132,6 +152,8 @@ const showHelpMenu = () => {
     });
 }
 
+
+//////////////////////////// Yes or No Menu //////////////////////////////////////////
 const yesNoMenu = () => {
 
     const confirm = require('console-menu');

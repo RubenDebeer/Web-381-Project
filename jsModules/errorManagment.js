@@ -57,10 +57,18 @@ module.exports = (fdir) => {
         }
     });
 
+    const showError = () => {
+        console.log('\x1b[41m%s\x1b[0m', obj.catchPhraseToUse);
+        console.log('\x1b[5m%s\x1b[0m', obj.description);
+        console.log('We suggest: ' + obj.suggestion);
+    }
+
     //If all the checks passed then a possitive will be returned
     obj.passed = true;
     obj.description = "All environment checks passed";
     obj.catchPhraseToUse = "It's working! It's functioning properly!";
     obj.correctedDir = fdir
     return obj;
+
+    
 }
