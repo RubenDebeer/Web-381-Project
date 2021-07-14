@@ -1,7 +1,6 @@
 const fs = require('fs');
 const zlib = require('zlib');
 
-
 //We need to get the suer input and change the readdirSync paramaters
 const directoryFiles = fs.readdirSync('c:/Users/boeps/Desktop/zipping/data3');
 Promise.all(directoryFiles.map(filename => {
