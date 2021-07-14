@@ -1,69 +1,78 @@
 
 var directory = "";
+const errorJSON = require('./app');
 
-const mainMenu = () => {
-    const menu = require('console-menu');
+module.exports = {
+    mainMenu: function() {
+        const menu = require('console-menu');
 
-    console.clear();
+        console.clear();
 
-    console.log('Behold my evil scheme...\n');
+        console.log('Behold my evil scheme...\n');
 
-    console.log("\x1b[31m%s\x1b[0m",
-        "░█──░█ █▀▀ █── █▀▀ █▀▀█ █▀▄▀█ █▀▀ 　 ▀▀█▀▀ █▀▀█ \n" +
-        "░█░█░█ █▀▀ █── █── █──█ █─▀─█ █▀▀ 　 ──█── █──█ \n" +
-        "░█▄▀▄█ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀▀ ▀───▀ ▀▀▀ 　 ──▀── ▀▀▀▀ \n\n");
+        console.log("\x1b[31m%s\x1b[0m",
+            "░█──░█ █▀▀ █── █▀▀ █▀▀█ █▀▄▀█ █▀▀ 　 ▀▀█▀▀ █▀▀█ \n" +
+            "░█░█░█ █▀▀ █── █── █──█ █─▀─█ █▀▀ 　 ──█── █──█ \n" +
+            "░█▄▀▄█ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀▀ ▀───▀ ▀▀▀ 　 ──▀── ▀▀▀▀ \n\n");
 
-    console.log("\x1b[34m%s\x1b[0m",
-        "▀▀█▀▀ █──█ █▀▀ 　 █▀▀█ █▀▄▀█ █▀▀█ ▀▀█ ─▀─ █▀▀▄ █▀▀▀ \n" + 
-        "──█── █▀▀█ █▀▀ 　 █▄▄█ █─▀─█ █▄▄█ ▄▀─ ▀█▀ █──█ █─▀█ \n" +
-        "──▀── ▀──▀ ▀▀▀ 　 ▀──▀ ▀───▀ ▀──▀ ▀▀▀ ▀▀▀ ▀──▀ ▀▀▀▀ \n\n" );
+        console.log("\x1b[34m%s\x1b[0m",
+            "▀▀█▀▀ █──█ █▀▀ 　 █▀▀█ █▀▄▀█ █▀▀█ ▀▀█ ─▀─ █▀▀▄ █▀▀▀ \n" + 
+            "──█── █▀▀█ █▀▀ 　 █▄▄█ █─▀─█ █▄▄█ ▄▀─ ▀█▀ █──█ █─▀█ \n" +
+            "──▀── ▀──▀ ▀▀▀ 　 ▀──▀ ▀───▀ ▀──▀ ▀▀▀ ▀▀▀ ▀──▀ ▀▀▀▀ \n\n" );
 
-    console.log("\x1b[36m%s\x1b[0m",
-        "░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀ ░█▀▀█ ─█▀▀█ ░█▀▀█ ▀▀█▀▀ ▀█▀ ── ░█▄─░█ ─█▀▀█ ▀▀█▀▀ ░█▀▀▀█ ░█▀▀█ \n" +
-        "░█▀▀▀ ─░█── ─░█── ░█▄▄▀ ░█▄▄█ ░█─── ─░█── ░█─ ▀▀ ░█░█░█ ░█▄▄█ ─░█── ░█──░█ ░█▄▄▀ \n" +
-        "░█▄▄▄ ▄▀░▀▄ ─░█── ░█─░█ ░█─░█ ░█▄▄█ ─░█── ▄█▄ ── ░█──▀█ ░█─░█ ─░█── ░█▄▄▄█ ░█─░█ \n\n");
+        console.log("\x1b[36m%s\x1b[0m",
+            "░█▀▀▀ ▀▄░▄▀ ▀▀█▀▀ ░█▀▀█ ─█▀▀█ ░█▀▀█ ▀▀█▀▀ ▀█▀ ── ░█▄─░█ ─█▀▀█ ▀▀█▀▀ ░█▀▀▀█ ░█▀▀█ \n" +
+            "░█▀▀▀ ─░█── ─░█── ░█▄▄▀ ░█▄▄█ ░█─── ─░█── ░█─ ▀▀ ░█░█░█ ░█▄▄█ ─░█── ░█──░█ ░█▄▄▀ \n" +
+            "░█▄▄▄ ▄▀░▀▄ ─░█── ░█─░█ ░█─░█ ░█▄▄█ ─░█── ▄█▄ ── ░█──▀█ ░█─░█ ─░█── ░█▄▄▄█ ░█─░█ \n\n");
 
 
-        console.log('\x1b[33m%s\x1b[0m',"A simple application for creating and extracting archives.");
-        console.log('\x1b[31m%s\x1b[0m',"Just follow the instructions..");
+            console.log('\x1b[33m%s\x1b[0m',"A simple application for creating and extracting archives.");
+            console.log('\x1b[31m%s\x1b[0m',"Just follow the instructions..");
 
-    menu([
-        { hotkey: '1', title: 'Compress files' },
-        { hotkey: '2', title: 'Unzip files'},
-        { hotkey: '3', title: 'Quit' },
-        { separator: true },
-        { hotkey: '?', title: 'Help' },
-    ], {
-        header: 'Ferb, I know what we are gonna do today!',
-        border: true,
-    }).then(item => {
-        switch (item.hotkey) {
-            case '1':
-                compressFiles();
-                break;
-            case '2':
-                unzipFiles();
-                break;
-            case '3':
-                console.clear();
-                console.log('\x1b[31m%s\x1b[0m','Candace is out. PEACE!');
-                setTimeout(function(){
+        menu([
+            { hotkey: '1', title: 'Compress files' },
+            { hotkey: '2', title: 'Unzip files'},
+            { hotkey: '3', title: 'Quit' },
+            { separator: true },
+            { hotkey: '?', title: 'Help' },
+        ], {
+            header: 'Ferb, I know what we are gonna do today!',
+            border: true,
+        }).then(item => {
+            switch (item.hotkey) {
+                case '1':
+                    compressFiles();
+                    break;
+                case '2':
+                    unzipFiles();
+                    break;
+                case '3':
                     console.clear();
-                    console.log('You quit the program.');
-                  },3000);
-                break;
-            case '?':
-                showHelpMenu();
-                break;
-            default:
-                console.log("Invalid option.");
-                mainMenu();
-                break;
-        }
-    });
-}
+                    console.log('\x1b[31m%s\x1b[0m','Candace is out. PEACE!');
+                    setTimeout(function(){
+                        console.clear();
+                        console.log('You quit the program.');
+                    },3000);
+                    break;
+                case '?':
+                    showHelpMenu();
+                    break;
+                default:
+                    console.log("Invalid option.");
+                    mainMenu();
+                    break;
+            }
+        });
+    },
 
-mainMenu();
+    showError : function(obj) {
+        console.log('\x1b[41m%s\x1b[0m', obj.catchPhraseToUse);
+        console.log('\x1b[5m%s\x1b[0m', obj.description);
+        console.log('We suggest: \n' + obj.suggestion);
+        console.log();
+    }
+
+}
 
 ////////////////////////// METHODS /////////////////////////////////////////
 
@@ -79,7 +88,7 @@ const compressFiles = () => {
 }
 
 const unzipFiles = () => {
-    console.log('\x1b[36m%s\x1b[0m','You chose to zip files, so let us zip this baby up.\n');
+    console.log('\x1b[36m%s\x1b[0m','You chose to unzip files, so let us unzip this baby.\n');
     
     //check if directory is valid
 
@@ -178,14 +187,4 @@ const yesNoMenu = () => {
                 break;
         }
     });
-}
-
-
-/////////////////////////// ERRORS ////////////////////
-
-const showError = () => {
-    console.log('\x1b[41m%s\x1b[0m', obj.catchPhraseToUse);
-    console.log('\x1b[5m%s\x1b[0m', obj.description);
-    console.log('We suggest: \n' + obj.suggestion);
-    console.log();
 }
