@@ -62,11 +62,10 @@ const mainMenu = () => {
 
 mainMenu();
 
-const showError = () => {
+const showError = (obj) => {
     console.log('\x1b[41m%s\x1b[0m', obj.catchPhraseToUse);
     console.log('\x1b[5m%s\x1b[0m', obj.description);
     console.log('We suggest: \n' + obj.suggestion);
-    console.log();
 }
 
 
