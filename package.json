@@ -23,6 +23,7 @@
     "homepage": "https://github.com/RubenDebeer/Web-381-Project#readme",
     "dependencies": {
         "console-menu": "^0.1.0",
+        "extract-zip": "^2.0.1",
         "prompt-sync": "^4.2.0"
     }
 }

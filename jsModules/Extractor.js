@@ -1,23 +1,37 @@
+const extract = require('extract-zip')
 const fs = require('fs');
-const zlib = require('zlib');
+const path = require('path');
+const zippedFiles = [];
 
-module.exports = {
-    extract: function(dir) {
-        var message;
-        const directoryFiles = fs.readdirSync(dir);
-
-        Promise.all(directoryFiles.map((filename) => {
-                return new Promise((resolve, reject) => {
-                    const fileContents = fs.createReadStream(`${dir}/${filename}`);
-                    const writeStream = fs.createWriteStream(`${dir}/${filename.slice(0, - 3)}`);
-                    const unzip = zlib.createGunzip();
-                    fileContents.pipe(unzip).pipe(writeStream).on('finish', (err) => {
-                        if (err) return reject(err);
-                        else resolve();
-                    })
-                })
-            }))
-            .then(message = 'success');
-        return message
+async function extractZip(source, target) {
+    try {
+        await extract(source, { dir: target });
+        console.log("Extraction complete");
+    } catch (err) {
+        console.log("Oops: extractZip failed", err);
     }
+}
+
+const unzipFiles = async function(dirPath) {
+    const files = fs.readdirSync(dirPath);
+
+    await Promise.all(
+        files.map(async(file) => {
+            if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+                await unzipFiles(dirPath + "/" + file);
+            } else {
+                const fullFilePath = path.join(dirPath, "/", file);
+                const folderName = file.replace(".zip", "");
+                if (file.endsWith(".zip")) {
+                    zippedFiles.push(folderName);
+                    await extractZip(fullFilePath, path.join(dirPath, "/", folderName));
+                    await unzipFiles(path.join(dirPath, "/", folderName));
+                }
+            }
+        })
+    );
+};
+
+module.exports = (path) => {
+    unzipFiles(path);
 }
