@@ -16,16 +16,22 @@ module.exports = (fdir, methodUsed) => {
     }
 
     //checks if the Dir exists
-    fs.access(fdir, (error) => {
-        if (error) {
+    try {
+        if (!fs.existsSync(fdir)) {
             obj.passed = false;
             obj.description = "The Directory specified does not exist";
             obj.suggestion = "Check the Dir inputed insure that all characters match what exists"
             obj.catchPhraseToUse = "Curse you, Perry the Platypus!";
             return obj;
         }
-    });
-
+    } catch (e) {
+        obj.passed = false;
+        obj.description = "The Directory specified does not exist";
+        obj.suggestion = "Check the Dir inputed insure that all characters match what exists"
+        obj.catchPhraseToUse = "Curse you, Perry the Platypus!";
+        return obj;
+    }
+    
     //this method works for testing permissions of the folder, but can not be run in conjunction with the compression of a file
     if (methodUsed != 'Compression') {
         //creates a test file to check if system has write permissions

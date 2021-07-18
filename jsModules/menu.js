@@ -1,12 +1,4 @@
-//check object
-var obj
-
 const mainMenu = () => {
-    if (obj != null) {
-        if (obj.passed) {
-
-        }
-    }
 
     const menu = require('console-menu');
 
@@ -71,13 +63,6 @@ const mainMenu = () => {
 
 mainMenu();
 
-const showError = (obj) => {
-    console.log('\x1b[41m%s\x1b[0m', obj.catchPhraseToUse);
-    console.log('\x1b[5m%s\x1b[0m', obj.description);
-    console.log('We suggest: \n' + obj.suggestion);
-}
-
-
 ////////////////////////// METHODS /////////////////////////////////////////
 
 const prompt = require('prompt-sync')();
@@ -88,14 +73,13 @@ const compressFiles = () => {
 
     console.log('\x1b[36m%s\x1b[0m', 'You chose to compress files, so let us compress this baby up.\n');
 
-    obj = environmentChecker(getDirectory(), 'Compression');
+    var obj = environmentChecker(getDirectory(), 'Compression');
     if (obj.passed) {
         compressFolders(obj.correctedDir);
         mainMenu();
-    } else {
-        showError(obj);
     }
 
+    showStatus(obj);
 }
 
 const unzipFiles = () => {
@@ -104,18 +88,42 @@ const unzipFiles = () => {
 
     console.log('\x1b[36m%s\x1b[0m', 'You chose to unzip files, so let us unzip this baby.\n');
 
-    obj = environmentChecker(getDirectory(), 'Decompression');
+    var obj = environmentChecker(getDirectory(), 'Decompression');
     if (obj.passed) {
         uncompressFolders(obj.correctedDir);
         mainMenu();
-    } else {
-        showError(obj);
-    }
+    } 
 
+    showStatus(obj);
 }
 
 const getDirectory = () => {
     return prompt('Please enter the file directory: ');
+}
+
+const showError = (obj) => {
+    console.log('\x1b[41m%s\x1b[0m', obj.catchPhraseToUse);
+    console.log('\x1b[5m%s\x1b[0m', obj.description);
+    console.log('We suggest: \n' + obj.suggestion);
+}
+
+const showStatus = (obj) => {
+    
+    if (obj.passed) {
+        console.clear();
+        console.log("Success :)");
+        console.log("Returning to menu in 5 seconds ...");
+        setTimeout(function() {
+            mainMenu()
+        }, 5000);
+    } else {
+        console.clear();
+        showError(obj);
+        console.log("Returning to menu in 5 seconds ...");
+        setTimeout(function() {
+            mainMenu()
+        }, 5000);
+    }
 }
 
 ////////////////////// HELP MENU ///////////////////////////////////
