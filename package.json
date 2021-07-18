@@ -24,6 +24,7 @@
     "dependencies": {
         "console-menu": "^0.1.0",
         "extract-zip": "^2.0.1",
-        "prompt-sync": "^4.2.0"
+        "prompt-sync": "^4.2.0",
+        "zip-lib": "^0.7.2"
     }
 }

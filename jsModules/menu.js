@@ -1,4 +1,13 @@
+//check object
+var obj
+
 const mainMenu = () => {
+    if (obj != null) {
+        if (obj.passed) {
+
+        }
+    }
+
     const menu = require('console-menu');
 
     console.clear();
@@ -79,30 +88,34 @@ const compressFiles = () => {
 
     console.log('\x1b[36m%s\x1b[0m', 'You chose to compress files, so let us compress this baby up.\n');
 
-    //var obj = environmentChecker(getDirectory())
-    //if (obj.passed) {
-    compressFolders.compress('D:\\MatinPersonalStudyProjects\\WebPrograming381\\Projects\\RecursiveUnzipper\\Web-381-Project\\Target');
-    //} else {
-    //    showError(obj);
-    //}
+    obj = environmentChecker(getDirectory(), 'Compression');
+    if (obj.passed) {
+        compressFolders(obj.correctedDir);
+        mainMenu();
+    } else {
+        showError(obj);
+    }
+
 }
 
 const unzipFiles = () => {
-    var uncompressFolders = require('./Extractor');
+    var uncompressFolders = require('./extractor');
     var environmentChecker = require('./environmentManagment');
 
     console.log('\x1b[36m%s\x1b[0m', 'You chose to unzip files, so let us unzip this baby.\n');
 
-    var obj = environmentChecker(getDirectory())
+    obj = environmentChecker(getDirectory(), 'Decompression');
     if (obj.passed) {
-        uncompressFolders.extract(obj.correctedDir);
+        uncompressFolders(obj.correctedDir);
+        mainMenu();
     } else {
         showError(obj);
     }
+
 }
 
 const getDirectory = () => {
-    return prompt('Please enter the file directory.');
+    return prompt('Please enter the file directory: ');
 }
 
 ////////////////////// HELP MENU ///////////////////////////////////

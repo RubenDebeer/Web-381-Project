@@ -1,4 +1,4 @@
-module.exports = (fdir) => {
+module.exports = (fdir, methodUsed) => {
     const fs = require("fs");
     const json = '{"passed":false, "description":"", "suggestion":"", "catchPhraseToUse":"", "correctedDir":""}';
     var obj = JSON.parse(json);
@@ -16,51 +16,58 @@ module.exports = (fdir) => {
     }
 
     //checks if the Dir exists
-    if (!fs.existsSync(fdir)) {
-        obj.passed = false;
-        obj.description = "The Directory specified does not exist";
-        obj.suggestion = "Check the Dir inputed insure that all characters match what exists"
-        obj.catchPhraseToUse = "Curse you, Perry the Platypus!";
-        return obj;
+    fs.access(fdir, (error) => {
+        if (error) {
+            obj.passed = false;
+            obj.description = "The Directory specified does not exist";
+            obj.suggestion = "Check the Dir inputed insure that all characters match what exists"
+            obj.catchPhraseToUse = "Curse you, Perry the Platypus!";
+            return obj;
+        }
+    });
+
+    //this method works for testing permissions of the folder, but can not be run in conjunction with the compression of a file
+    if (methodUsed != 'Compression') {
+        //creates a test file to check if system has write permissions
+        fs.open(fdir + '/test.txt', 'w', function(err, file) {
+            if (err) {
+                obj.passed = false;
+                obj.description = "Directory does not have create permissions";
+                obj.suggestion = "change security permissions to allow any users to create files and folders"
+                obj.catchPhraseToUse = "THE ENTIRE TRI-STATE AREA!";
+                return obj;
+            }
+        });
+
+        //writes to test file to check if system has append permissions
+        fs.appendFile(fdir + '/test.txt', 'text for testing writing ability.', function(err) {
+            if (err) {
+                obj.passed = false;
+                obj.description = "The Directory does not have append permissions";
+                obj.suggestion = "change security permissions to allow any users to append files and folders"
+                obj.catchPhraseToUse = "Witchcraft!!";
+                return obj;
+            }
+        });
+
+        //delete's test file to check if system has delete permissions
+        fs.unlink(fdir + '/test.txt', function(err) {
+            if (err) {
+                obj.passed = false;
+                obj.description = "The Directory does not have delete permissions";
+                obj.suggestion = "change security permissions to allow any users to delete files and folders (Go to Dir to Delete test.txt)"
+                obj.catchPhraseToUse = "Oh... poo";
+                return obj;
+            }
+        });
     }
 
-    //creates a test file to check if system has write permissions
-    fs.open(fdir + '/test.txt', 'w', function(err, file) {
-        if (err) {
-            obj.passed = false;
-            obj.description = "Directory does not have create permissions";
-            obj.suggestion = "change security permissions to allow any users to create files and folders"
-            obj.catchPhraseToUse = "THE ENTIRE TRI-STATE AREA!";
-            return obj;
-        }
-    });
-
-    //writes to test file to check if system has append permissions
-    fs.appendFile(fdir + '/test.txt', 'text for testing writing ability.', function(err) {
-        if (err) {
-            obj.passed = false;
-            obj.description = "The Directory does not have append permissions";
-            obj.suggestion = "change security permissions to allow any users to append files and folders"
-            obj.catchPhraseToUse = "Witchcraft!!";
-            return obj;
-        }
-    });
-
-    //delete's test file to check if system has delete permissions
-    fs.unlink(fdir + '/test.txt', function(err) {
-        if (err) {
-            obj.passed = false;
-            obj.description = "The Directory does not have delete permissions";
-            obj.suggestion = "change security permissions to allow any users to delete files and folders (Go to Dir to Delete test.txt)"
-            obj.catchPhraseToUse = "Oh... poo";
-            return obj;
-        }
-    });
 
     //If all the checks passed then a possitive will be returned
     obj.passed = true;
     obj.description = "All environment checks passed";
     obj.catchPhraseToUse = "It's working! It's functioning properly!";
+    obj.suggestion = "The piece of plastic at the end of your shoelace is called an aglet"
     obj.correctedDir = fdir
     return obj;
 

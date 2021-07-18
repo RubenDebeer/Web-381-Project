@@ -29,7 +29,9 @@ const unzipFiles = async function(dirPath) {
                 }
             }
         })
-    );
+    ).catch(() => {
+        //Ah, Perry the Platypus, you're just in time... to be trapped. (Trap comes)
+    });
 };
 
 module.exports = (path) => {
